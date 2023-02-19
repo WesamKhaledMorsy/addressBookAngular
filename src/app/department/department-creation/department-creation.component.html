@@ -1,0 +1,30 @@
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <form class="card-body" [formGroup]="AddForm" (ngSubmit)="onSubmit()">
+          <h4 class="card-title mb-4">{{ isAddMode ? "Create Department" : "Edit Department" }}</h4>
+
+            <div class="row mb-4">
+              <label for="departmentName" class="col-form-label col-lg-2" >Department Name</label>
+                <div class="col-lg-10">
+                <input id="departmentName"
+                formControlName="departmentName" type="text" class="form-control"
+                  placeholder="Enter Department Name..." [(ngModel)]="departmentInput.departmentName">
+              </div>
+            </div>
+
+          <div class="row justify-content-end">
+            <div class="col-lg-10" >
+              <button
+              type="submit"
+              class="btn btn-primary"
+              >{{ isAddMode ? "Create Department" : "Edit Department" }}</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

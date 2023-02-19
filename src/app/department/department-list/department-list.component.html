@@ -1,0 +1,51 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="isAuth"><h1>Dapartment</h1></div>
+ <div class="row">
+  <div class="col-12">
+    <button type="button"
+    class="btn btn-primary"
+    style="display: inline-block;"
+    [routerLink]="['/department/departmentCreation']">Create department </button>
+  </div>
+ </div>
+  <div class="row">
+    <div class="table-responsive">
+
+
+      <table class="table table-striped-columns">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" (click)="sortName()"> Department Name &nbsp;</th>
+            <th scope="col" >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <tr class="col" *ngFor="let depart of DepartmentData;index as i">
+            <td>{{i+1}}</td>
+            <td>
+              <a>
+                {{depart.departmentName}}
+              </a>
+            </td>
+            <td>
+              <button [routerLink]="['/department/departmentEdit',depart.id]"
+               class="btn btn-primary">Edit</button>
+              <a type="button" class="btn btn-danger"
+              style="cursor: pointer;" style="margin-left:2% ;"
+               (click)="onDeleteDepartment(depart .id)">Delete</a>
+             </td>
+          </tr>
+
+        </tbody>
+      </table>
+
+
+    </div>
+  </div>
+</div>
+
+
+

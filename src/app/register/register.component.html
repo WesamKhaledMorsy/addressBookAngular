@@ -1,0 +1,60 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-8">
+      <div class="card">
+        <form [formGroup]="signUpForm"
+        class="card-body"
+         (ngSubmit)="register()">
+
+         <div class="row mb-4">
+          <label for="userName" class="col-form-label col-lg-2" >User Name</label>
+            <div class="col-lg-10">
+            <input id="userName"
+            formControlName="userName" type="text" class="form-control"
+            pattern="(.*[a-z].*)"
+              placeholder="Enter userName...">
+              <div *ngIf="signUpForm.get('userName')?.invalid && (signUpForm.get('userName')?.dirty || signUpForm.get('userName')?.touched)" class="alert alert-danger">
+                <p *ngIf="signUpForm.get('userName')?.errors?.['required']">User Name is required.</p>
+                <p *ngIf="signUpForm.get('userName')?.errors?.['pattern']">lowercase without spaces</p>
+            </div>
+          </div>
+        </div>
+
+         <div class="row mb-4">
+          <label for="email" class="col-form-label col-lg-2" >Email</label>
+            <div class="col-lg-10">
+            <input id="email"
+            formControlName="email" type="text" class="form-control"
+              placeholder="Enter Email..." >
+              <div *ngIf="signUpForm.get('email')?.invalid && (signUpForm.get('email')?.dirty || signUpForm.get('email')?.touched)" class="alert alert-danger">
+                <p *ngIf="signUpForm.get('email')?.errors?.['required']">Email is required.</p>
+                <p *ngIf="signUpForm.get('email')?.errors?.['required']">Enter Unique Email</p>
+            </div>
+          </div>
+        </div>
+        <div class="row mb-4">
+          <label for="password" class="col-form-label col-lg-2" >Password</label>
+            <div class="col-lg-10">
+            <input id="password"  pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&].{8,}"
+            formControlName="password" type="password" class="form-control"
+              placeholder="Enter Password..." >
+              <div *ngIf="signUpForm.get('password')?.invalid && (signUpForm.get('password')?.dirty || signUpForm.get('password')?.touched)" class="alert alert-danger">
+                <p *ngIf="signUpForm.get('password')?.errors?.['required']">Password is required.</p>
+                <p *ngIf="signUpForm.get('password')?.errors?.['pattern']">At least 8 characters in length =>capital and small letters and signs</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="row justify-content-end">
+          <div class="col-lg-10" >
+          <button class="btn btn-primary"
+          [disabled]="signUpForm.invalid"
+              type="submit">Register</button>
+          </div>
+        </div>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>

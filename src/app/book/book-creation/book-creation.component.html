@@ -1,0 +1,162 @@
+
+<!-- </ng-template> -->
+
+<!-- end row -->
+
+<!-- container-fluid -->
+
+
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <p *ngIf="isValidFormSubmitted && AddForm.pristine" [ngClass] = "'success'">
+                  Form submitted successfully.
+              </p>
+                <form class="card-body" [formGroup]="AddForm" (ngSubmit)="onSubmit()">
+                  <h4 class="card-title mb-4" *ngIf="isAddMode">Create New Book</h4>
+
+                    <div class="row mb-4">
+                      <label for="fullName" class="col-form-label col-lg-2" >Full Name</label>
+                        <div class="col-lg-10">
+                        <input id="fullName"
+                        formControlName="fullName" type="text" class="form-control"
+                          placeholder="Enter fullName..." [maxlength]="20" [minlength]="5"
+                          [(ngModel)]="bookInput.fullName">
+                          <div  *ngIf="AddForm.get('fullName')?.invalid && (AddForm.get('fullName')?.dirty || AddForm.get('mobile')?.touched)" class="alert alert-danger">
+                            <p style="height: min-content;" *ngIf="AddForm.get('fullName')?.errors?.['required']">Name is required.</p>
+                            <p *ngIf="AddForm.get('fullName')?.errors?.['maxlength']">Max 20 characters.</p>
+                            <p *ngIf="AddForm.get('fullName')?.errors?.['minlength']">Min 5 characters.</p>
+                          </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <label for="mobile" class="col-form-label col-lg-2" >Mobile</label>
+                        <div class="col-lg-10">
+                        <input id="mobile"
+                        formControlName="mobile" class="form-control"
+                        type="text" [maxlength]="11"
+                          placeholder="Enter mobile..." pattern="^[0-9]*$"
+                          [(ngModel)]="bookInput.mobile">
+                          <div *ngIf="AddForm.get('mobile')?.invalid && (AddForm.get('mobile')?.dirty || AddForm.get('mobile')?.touched)" class="alert alert-danger">
+                            <p *ngIf="AddForm.get('mobile')?.errors?.['required']">Mobile is required.</p>
+                            <p *ngIf="AddForm.get('mobile')?.errors?.['maxlength']">Max 11 number.</p>
+                            <p *ngIf="AddForm.get('mobile')?.errors?.['pattern']">Enter only number.</p>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <label for="address" class="col-form-label col-lg-2" >Address</label>
+                        <div class="col-lg-10">
+                        <input id="address"
+                        formControlName="address" type="text" class="form-control"
+                          placeholder="Enter address..."
+                          [(ngModel)]="bookInput.address">
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <label class="col-form-label col-lg-2">dateOfBirth (mm/dd/yyyy)</label>
+                      <div class="col-lg-10">
+                        <input   class="form-control"
+                        formControlName="dateOfBirth" placeholder="Date Of Birth"
+                        type="date" name="dateOfBirth"
+                        [(ngModel)]="bookInput.dateOfBirth" />
+                      </div>
+                    </div>
+
+                    <div class="row mb-4">
+                      <label for="age" class="col-form-label col-lg-2" >Age</label>
+                        <div class="col-lg-10">
+                        <input id="age"
+                        formControlName="age" type="text"
+                        pattern="^[0-9]*$" class="form-control" [maxlength]="2"
+                          placeholder="Enter age..."
+                          [(ngModel)]="bookInput.age">
+                          <div *ngIf="AddForm.get('age')?.invalid && (AddForm.get('age')?.dirty || AddForm.get('age')?.touched)" class="alert alert-danger">
+                            <p *ngIf="AddForm.get('age')?.errors?.['required']">Age is required.</p>
+                            <p *ngIf="AddForm.get('age')?.errors?.['pattern']" >Enter only number.</p>
+
+                        </div>
+                        </div>
+                      </div>
+
+                    <div class="row mb-3">
+                      <label for="departmentId" class="col-md-3 col-form-label">Department Name</label>
+                      <div class="col-md-9">
+                        <select  id="departmentId" formControlName="departmentId"  class="form-control"
+                        [(ngModel)]="bookInput.departmentId"
+                          placeholder="Enter Department Name">
+                          <option value="">----------Department-------------</option>
+                          <option *ngFor="let depart of departments"
+                          [value]="depart.id">
+                            {{depart.departmentName}}
+                            </option>
+
+                        </select>
+
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="jobId" class="col-md-3 col-form-label">Job Title</label>
+                      <div class="col-md-9">
+                        <select  id="jobId" formControlName="jobId"  class="form-control"
+                        [(ngModel)]="bookInput.jobId"
+                          placeholder="Enter Job Title">
+                          <option value="">-----------Job Title-------------</option>
+                          <option *ngFor="let job of jobs"
+                          [value]="job.id">
+                            {{job.jobTitle}}
+                            </option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div class="row mb-3">
+                      <label for="photo" class="col-md-3 col-form-label">Photo</label>
+                      <div class="col-8">
+                    <div class="form-group">
+                      <input formControlName="photo"
+                      id="photo"[(ngModel)]="bookInput.photo"
+                       type="file" (change)="fileSelected($event)" #fileInput>
+                       <!-- <button type="button" (click)="fileInput.click()">pick file</button>
+                       <button type="button" (click)="onUpLoad()">Upload Photo</button> -->
+                  </div>
+                      </div>
+                    </div>
+
+                  <div class="row justify-content-end">
+                    <div class="col-lg-10" >
+                      <button
+                      type="submit"
+                      class="btn btn-primary"
+                      [disabled]="AddForm.invalid"
+                      >{{ isAddMode ? "Create Book" : "Edit Book" }}</button>
+                    </div>
+                  </div>
+
+
+
+<!--
+                  <div class="row mb-3" *ngIf="!isAddMode">
+                    <label for="photo" class="col-md-3 col-form-label">Photo</label>
+                    <div class="col-8">
+                      <ngx-dropzone  (change)="uploadPhoto($event,bookInput.id)">
+                        <ngx-dropzone-label>Drop it, Here!</ngx-dropzone-label>
+                        <ngx-dropzone-preview *ngFor="let f of files" [removable]="true" (removed)="onRemove(f)">
+                          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+                        </ngx-dropzone-preview>
+                      </ngx-dropzone>
+                    </div>
+                  </div> -->
+                </form>
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+

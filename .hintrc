@@ -1,0 +1,29 @@
+{
+  "extends": [
+    "development"
+  ],
+  "hints": {
+    "axe/forms": "off",
+    "axe/name-role-value": [
+      "default",
+      {
+        "button-name": "off"
+      }
+    ],
+    "no-inline-styles": "off",
+    "button-type": "off",
+    "compat-api/css": [
+      "default",
+      {
+        "ignore": [
+          "-webkit-overflow-scrolling",
+          "-webkit-tap-highlight-color",
+          "user-select"
+        ]
+      }
+    ],
+    "meta-charset-utf-8": "off",
+    "apple-touch-icons": "off",
+    "typescript-config/strict": "off"
+  }
+}

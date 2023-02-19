@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row"><h1>Jobs</h1></div>
+  <div class="row">
+    <div class="col-3">
+      <button class="btn btn-primary"
+      style="display: inline-block;"
+      [routerLink]="['/job/jobCreation']"> Create Job </button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+      <table class="table table-striped-columns">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" (click)="sortName()"> Job Title &nbsp;</th>
+            <th scope="col" >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let job of JobData;  index as i" >
+            <td>{{i+1}}</td>
+            <td>
+              <a>
+                {{job.jobTitle}}
+              </a>
+            </td>
+            <td>
+              <!-- <a [routerLink]="['/book/bookEdit',book.id]">Edit</a> -->
+              <button [routerLink]="['/job/jobEdit',job.id]" class="btn btn-primary">Edit</button>
+              <a type="button" class="btn btn-danger"
+              style="cursor: pointer;" style="margin-left:2% ;"
+               (click)="onDeleteJob(job .id)">Delete</a>
+             </td>
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+

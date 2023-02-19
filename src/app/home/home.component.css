@@ -1,0 +1,14 @@
+
+img{
+  margin-left: 10%;
+  height: 50%;
+  width: 80%;
+  opacity: 80%;
+}
+#p1{
+  margin-left: 40%;
+  color:darkred;
+  font-size: 25px;
+  text-shadow:5vh;
+  text-decoration: double;
+}

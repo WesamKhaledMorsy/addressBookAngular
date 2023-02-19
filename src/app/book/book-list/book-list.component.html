@@ -1,0 +1,143 @@
+
+<div class="container-fluid">
+  <div class="row"><h1>Book</h1></div>
+  <div class="row">
+    <div class="col-lg-10">
+      <button type="button"
+  style="float: right; position: relative;"
+   class="btn btn-outline-primary"
+      [routerLink]="['/book/bookCreation']">Create Book </button>
+    </div>
+  </div>
+  <div class="row">
+
+<form class="card-body" [formGroup]="searchForm">
+      <div class="col-4 d-inline-block">
+          <label for="fullName">Full Name</label>
+          <input id="fullName" type="text" placeholder="Full Name ........"
+          [ngModelOptions]="{standalone: true}"
+          formControlName="FullName" class="form-control" [minlength]="5"
+          [(ngModel)]="fullName" >
+
+      </div>
+
+    <div class="col-3 d-inline-block">
+        <label for="jobId">Job Title</label>
+        <select  id="jobId" formControlName="JobId" class="form-select"  [ngModelOptions]="{standalone: true}" >
+          <option disabled selected>----Job Title-------</option>
+          <option  *ngFor="let job of jobs"
+          [(ngModel)]="job.id">
+            {{job.jobTitle}}
+          </option>
+        </select>
+    </div>
+    <div class="col-3 d-inline-block">
+      <label for="departmentId">Departrment Name</label>
+      <select  id="departmentId" formControlName="DepartmentId"  [ngModelOptions]="{standalone: true}" class="form-select" >
+        <option disabled selected> -------Departrment Name------- </option>
+        <option  *ngFor="let depart of departments"
+        [(ngModel)]="depart.id">
+          {{depart.departmentName}}
+        </option>
+      </select>
+  </div>
+    <div class="col-3 d-inline-block">
+      <label for="address">Address</label>
+      <input id="address" type="text" placeholder="Address ........" [ngModelOptions]="{standalone: true}"
+      formControlName="Address" class="form-control"
+      [(ngModel)]="address" >
+    </div>
+    <div class="col-3 d-inline-block">
+      <label for="age">Age</label>
+      <input id="age" type="number" placeholder="Age ......." [ngModelOptions]="{standalone: true}"
+      formControlName="Age" class="form-control" maxlength="2" minlength="2"
+      [(ngModel)]="age" >
+    </div>
+
+    <div class="col-3 d-inline-block">
+      <label for="dateOfBirth">Bate Of Birth</label>
+      <input id="dateOfBirth" type="date" placeholder="Date of birth ........" [ngModelOptions]="{standalone: true}"
+      formControlName="DateOfBirth" class="form-control"
+      [(ngModel)]="dateOfBirth" >
+    </div>
+    <div class="col-2 d-inline-block">
+      <label for="mobile">Mobile</label>
+      <input id="mobile" type="text" placeholder="Mobile Number ...."
+      [ngModelOptions]="{standalone: true}"
+      formControlName="Mobile" class="form-control"
+      [(ngModel)]="mobile" >
+    </div>
+
+    <div class="col-lg-12">
+      <div class="btn-group btn-group-example mb-3" role="group">
+          <button type="button" class="btn btn-primary w-xs mt-2" (click)="FilterBooks()" >
+          Search<i class="bx bx-search-alt search-icon"></i></button>
+          <button type="button" class="btn btn-danger w-xs mt-2" (click)="Reset()">
+          Reset  </button>
+      </div>
+    </div>
+  </form>
+  </div>
+
+  <div class="row">
+    <div class="col-lg-10">
+      <button class="btn btn-outline-success" (click)="exportexcel()">Export to Excel</button>
+
+    </div>
+  </div>
+  <div class="row">
+    <div class="table-responsive">
+
+
+      <table  id="excel-table" class="table table-dark table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col" >Full Name &nbsp;</th>
+            <th  scope="col">Mobile</th>
+            <th scope="col">Address</th>
+            <th scope="col">Date of birth</th>
+            <th scope="col">Age</th>
+            <th scope="col">Job Title</th>
+            <th scope="col">Department</th>
+            <th scope="col">Photo</th>
+            <th scope="col" >Action</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+          <tr *ngFor="let book of BookData ;index as i">
+            <td>{{i+1}}</td>
+            <td>
+              <a>
+                {{book.fullName}}
+              </a>
+            </td>
+            <td> <a>{{book.mobile}}</a></td>
+            <td><a>{{book.address}}</a></td>
+            <td><a>{{book.dateOfBirth | date:'shortDate'}}</a></td>
+            <td><a>{{book.age}}</a></td>
+            <td><a>{{book.jobTitle}}</a></td>
+            <td><a>{{book.departmentName}}</a></td>
+            <td><a>{{book.photo}}</a></td>
+            <td>
+             <!-- <a [routerLink]="['/book/bookEdit',book.id]">Edit</a> -->
+             <button [routerLink]="['/book/bookEdit',book.id]"
+             class="btn btn-primary" >Edit</button>
+             <a type="button"
+             style="cursor: pointer;" style="margin-left:2% ;"
+             class="btn btn-danger"
+              (click)="onDeleteBook(book.id)">Delete</a>
+            </td>
+          </tr>
+
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+</div>
+
+
+
